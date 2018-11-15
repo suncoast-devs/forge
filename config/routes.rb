@@ -3,6 +3,12 @@ Rails.application.routes.draw do
     resources :projects
   end
 
+  resources :projects, only: [:index, :show] do
+    member do
+      post :comment
+    end
+  end
+
   get "sign_in", to: redirect("/auth/#{Rails.env.production? ? :google_oauth2 : :developer}")
   get "sign_out", to: "sessions#destroy"
   get "auth/failure", to: redirect("/")

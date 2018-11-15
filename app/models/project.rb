@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Project < ApplicationRecord
-  enum status: [:open, :in_progress, :complete]
+  enum status: %i[open in_progress complete]
 
   has_many :comments
-  belongs_to :requested_by, class_name: "User"
+  belongs_to :requested_by, class_name: 'User'
 
   validates :title, presence: true
   validates :description, presence: true

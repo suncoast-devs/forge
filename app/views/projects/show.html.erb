@@ -1,0 +1,31 @@
+<h1 class="title"><%= @project.title %></h1>
+
+<div class="columns">
+  <div class="column">
+    <p><%= @project.description %></p>
+  </div>
+  <div class="column is-narrow">
+    <div class="box">
+      <table class="table">
+        <tr>
+          <th>Bid</th>
+          <td>$<%= @project.bid %></td>
+        </tr>
+        <tr>
+          <th>Deadline</th>
+          <td><%= time_tag @project.deadline_on %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% @project.comments.each do |comment| %>
+  <%= comment.author.name %>:
+  <%= comment.message %>
+<% end %>
+
+<%= form_with url: comment_project_path, model: @project.comments.new do |form| %>
+  <%= form.text_field :message %>
+  <%= form.submit %>
+<% end %>
