@@ -1,0 +1,46 @@
+<%= form_with model: [:admin, @project] do |form| %>
+  <% if @project.errors.any? %>
+    <% @project.errors.full_messages.each do |message| %>
+      <article class="message is-danger">
+        <div class="message-body">
+          <%= message %>
+        </div>
+      </article>
+    <% end %>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, class: "label" %>
+    <div class="control">
+      <%= form.text_field :title, class: "input" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :description, class: "label" %>
+    <div class="control">
+      <%= form.text_area :description, class: "textarea" %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :deadline_on, class: "label" %>
+    <div class="control">
+      <%= form.date_select :deadline_on %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :bid, class: "label" %>
+    <div class="control">
+      <%= form.text_field :bid, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit class: "button is-link" %>
+    </div>
+    <div class="control">
+      <%= link_to "Cancel", admin_projects_path, class: "button is-text" %>
+    </div>
+  </div>
+
+<% end %>

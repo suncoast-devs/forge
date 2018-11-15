@@ -1,0 +1,20 @@
+<% if signed_in? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Deadline</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= link_to project.title, [:admin, project] %></td>
+          <td><%= time_ago_in_words project.deadline_on %></td>
+          <td><span class="tag"><%= project.status.humanize %></span></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
