@@ -3,21 +3,18 @@ h1.title
 .columns
   .column
     p
-      = @project.description
+      = markdown @project.description
   .column.is-narrow
     .box
       table.table
         tr
-          th
-            | Bid
+          th Bid
           td
             | $
             = @project.bid
         tr
-          th
-            | Deadline
-          td
-            = time_tag @project.deadline_on
+          th Deadline
+          td= time_tag @project.deadline_on
 
 - @project.comments.each do |comment|
   article.media
@@ -35,7 +32,7 @@ h1.title
             small= "#{time_ago_in_words(comment.created_at)} ago"
 
       .content
-        = simple_format comment.message
+        = markdown comment.message
 
 article.media
   figure.media-left

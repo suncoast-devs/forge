@@ -4,4 +4,8 @@ module ApplicationHelper
     gravatar_url = "http://gravatar.com/avatar/#{gravatar_id}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
+
+  def markdown(markdown)
+    CommonMarker.render_html(markdown, :DEFAULT).html_safe
+  end
 end

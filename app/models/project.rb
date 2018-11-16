@@ -2,7 +2,6 @@ class Project < ApplicationRecord
   enum status: [:pending, :in_progress, :complete]
 
   has_many :comments
-  has_many :submissions
   belongs_to :requested_by, class_name: "User"
 
   validates :title, presence: true

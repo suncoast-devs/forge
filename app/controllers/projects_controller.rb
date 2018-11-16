@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate!
 
   def index
-    @projects = Project.all
+    @projects = Project.where.not(status: :complete).order(deadline_on: :ASC)
   end
 
   def show

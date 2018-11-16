@@ -11,7 +11,9 @@ table.table.is-fullwidth
     - @projects.each do |project|
       tr
         td= link_to project.title, project
-        td= time_ago_in_words project.deadline_on
+        td
+          = time_tag project.deadline_on
+          = " (#{time_ago_in_words project.deadline_on})"
         td
           | $
           = project.bid
