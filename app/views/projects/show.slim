@@ -1,12 +1,10 @@
-h1.title
-  = @project.title
+
 .columns
   .column
-    p
-      = markdown @project.description
+    h1.title= @project.title
   .column.is-narrow
     .box
-      table.table
+      table.table.is-fullwidth
         tr
           th Bid
           td
@@ -15,6 +13,15 @@ h1.title
         tr
           th Deadline
           td= time_tag @project.deadline_on
+        tr
+          th Status
+          td
+            span.tag= @project.status.humanize
+
+.content
+  = markdown @project.description
+
+h2.title.is-4 Discussion
 
 - @project.comments.each do |comment|
   article.media
@@ -26,13 +33,26 @@ h1.title
         .level-start
           .level-item
             strong= comment.author.name
-
         .level-end
           .level-item
             small= "#{time_ago_in_words(comment.created_at)} ago"
-
-      .content
-        = markdown comment.message
+      div[style="margin: 12px;"]
+        .columns
+          .column.content
+            = markdown comment.message
+          - if comment.file.attached?
+            .column.is-one-third.box
+              = link_to comment.file do
+                - if comment.file.previewable?
+                  figure.image
+                    = image_tag comment.file.preview(resize: "200x200>")
+                - elsif comment.file.variable?
+                  figure.image
+                    = image_tag comment.file.variant(resize: "200x200>")
+                - else
+                    span.icon
+                      i.fas.fa-download
+                    =< comment.file.blob.filename
 
 article.media
   figure.media-left
@@ -44,4 +64,14 @@ article.media
         p.control
           = form.text_area :message, class: "textarea"
       .field
+        p.control
+          .file.has-name
+            label.file-label
+              = form.file_field :file, class: "file-input"
+              span.file-cta
+                span.icon
+                  i.fas.fa-upload
+              span.file-name Choose a file&hellip;
+      .field
+        p.control
           = form.submit class: "button is-info"

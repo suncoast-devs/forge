@@ -7,6 +7,8 @@ html
     link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"]
     script[defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"]
     = javascript_include_tag "application"
+    = stylesheet_link_tag "application"
+
   body
     nav.navbar[role="navigation" aria-label="main navigation"]
       .container
@@ -36,4 +38,27 @@ html
                     = link_to "Sign In", sign_in_path, class: "button is-primary"
     section.section
       .container
+        - if notice.present?
+          article.message.is-success
+            .message-body= notice
         = yield
+
+    footer.footer
+      .content.has-text-centered
+        p
+          a.has-text-grey-dark[href="https://github.io/suncoast-devs/forge"]
+            span.icon.is-large
+              i.fab.fa-github.fa-lg
+        p
+          strong Forge
+          '  by
+          a[href="https://suncoast.io"] Suncoast Developers Guild
+          ' . The source code is licensed
+          a[href="http://opensource.org/licenses/mit-license.php"]
+            | MIT
+          | .
+          br
+          |  Made with
+          span.icon
+            i.fas.fa-heart.has-text-danger
+          | in St. Petersburg, FL.

@@ -13,7 +13,7 @@ table.table.is-fullwidth
         td= link_to project.title, project
         td
           = time_tag project.deadline_on
-          = " (#{time_ago_in_words project.deadline_on})"
+          small=< "(#{time_ago_in_words project.deadline_on} #{project.deadline_on.future? ? "from now" : "ago"})"
         td
           | $
           = project.bid

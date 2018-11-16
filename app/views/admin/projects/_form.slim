@@ -4,24 +4,70 @@
       article.message.is-danger
         .message-body
           = message
-  .field
-    = form.label :title, class: "label"
-    .control
-      = form.text_field :title, class: "input"
-  .field
-    = form.label :description, class: "label"
-    .control
-      = form.text_area :description, class: "textarea"
-  .field
-    = form.label :deadline_on, class: "label"
-    .control
-      = form.date_select :deadline_on
-  .field
-    = form.label :bid, class: "label"
-    .control
-      = form.text_field :bid, class: "input"
-  .field.is-grouped
-    .control
-      = form.submit class: "button is-link"
-    .control
-      = link_to "Cancel", admin_projects_path, class: "button is-text"
+
+  .field.is-horizontal
+    .field-label.is-normal
+      = form.label :title, class: "label"
+    .field-body
+      .field
+        .control
+          = form.text_field :title, class: "input"
+
+  .field.is-horizontal
+    .field-label.is-normal
+      = form.label :description, class: "label"
+    .field-body
+      .field
+        .control
+          = form.text_area :description, class: "textarea"
+        p.help
+          span.icon
+            i.fab.fa-markdown.fa-lg
+
+  .field.is-horizontal
+    .field-label.is-normal
+      = form.label :deadline_on, class: "label"
+    .field-body
+      .field.is-narrow
+        .control.has-icons-left
+          = form.date_field :deadline_on, class: "input"
+          span.icon.is-small.is-left
+            i.fas.fa-envelope
+
+  .field.is-horizontal
+    .field-label.is-normal
+      = form.label :bid, class: "label"
+    .field-body
+      .field.has-addons
+        .control
+          a.button.is-static
+            | $
+        .control
+          = form.number_field :bid, class: "input"
+
+  - unless project.new_record?
+    .field.is-horizontal
+      .field-label
+        = form.label :is_paid, class: "label"
+      .field-body
+        .field
+          .control
+            label.checkbox
+              = form.check_box :is_paid
+
+    .field.is-horizontal
+      .field-label.is-normal
+        = form.label :status, class: "label"
+      .field-body
+        .field
+          .control.select
+            = form.select :status, Project.statuses.keys.map { |k| [k.humanize, k] }
+
+  .field.is-horizontal
+    .field-label
+    .field-body
+      .field.is-grouped
+        .control
+          = form.submit class: "button is-link"
+        .control
+          = link_to "Cancel", admin_projects_path, class: "button is-text"

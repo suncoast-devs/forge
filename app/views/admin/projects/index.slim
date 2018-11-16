@@ -7,16 +7,23 @@ table.table.is-fullwidth
       th Deadline
       th Bid
       th Status
+      th Paid?
   tbody
     - @projects.each do |project|
       tr
         td= link_to project.title, [:edit, :admin, project]
-        td= time_ago_in_words project.deadline_on
+        td
+          = time_ago_in_words project.deadline_on
+          =< project.deadline_on.future? ? "from now" : "ago"
         td
           | $
           = project.bid
         td
           span.tag
             = project.status.humanize
+        td
+          - if project.is_paid?
+            span.icon
+              i.fas.fa-check
 
 = link_to "New Project", new_admin_project_path, class: "button is-primary"

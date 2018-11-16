@@ -18,4 +18,5 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
+  config.active_storage.service = :amazon
 end

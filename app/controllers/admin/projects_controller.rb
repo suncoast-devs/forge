@@ -16,7 +16,7 @@ module Admin
       end
 
       if @project.save
-        redirect_to [:admin, @project]
+        redirect_to @project, notice: "Project Created"
       else
         render :new
       end
@@ -26,10 +26,20 @@ module Admin
       @project = Project.find(params[:id])
     end
 
+    def update
+      @project = Project.find(params[:id])
+
+      if @project.update(project_params)
+        redirect_to @project, notice: "Project Updated"
+      else
+        render :new
+      end
+    end
+
     private
 
     def project_params
-      params.require(:project).permit(:title, :description, :deadline_on, :bid)
+      params.require(:project).permit(:title, :description, :deadline_on, :bid, :is_paid, :status)
     end
   end
 end
