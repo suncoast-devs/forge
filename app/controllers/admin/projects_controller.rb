@@ -11,7 +11,9 @@ module Admin
     end
 
     def create
-      @project = Project.new(project_params)
+      @project = Project.new(project_params) do |project|
+        project.requested_by = current_user
+      end
 
       if @project.save
         redirect_to [:admin, @project]
@@ -20,7 +22,7 @@ module Admin
       end
     end
 
-    def show
+    def edit
       @project = Project.find(params[:id])
     end
 

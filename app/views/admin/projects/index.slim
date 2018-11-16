@@ -10,7 +10,7 @@ table.table.is-fullwidth
   tbody
     - @projects.each do |project|
       tr
-        td= link_to project.title, [:admin, project]
+        td= link_to project.title, [:edit, :admin, project]
         td= time_ago_in_words project.deadline_on
         td
           | $

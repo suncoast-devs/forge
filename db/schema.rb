@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_11_15_152116) do
     t.bigint "author_id"
     t.bigint "project_id"
     t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["project_id"], name: "index_comments_on_project_id"
   end
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(version: 2018_11_15_152116) do
     t.integer "status"
     t.bigint "requested_by_id"
     t.bigint "authorized_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["authorized_by_id"], name: "index_projects_on_authorized_by_id"
     t.index ["requested_by_id"], name: "index_projects_on_requested_by_id"
   end
@@ -42,6 +46,8 @@ ActiveRecord::Schema.define(version: 2018_11_15_152116) do
     t.integer "status"
     t.text "memo"
     t.boolean "is_paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["accepted_by_id"], name: "index_submissions_on_accepted_by_id"
     t.index ["author_id"], name: "index_submissions_on_author_id"
     t.index ["project_id"], name: "index_submissions_on_project_id"
@@ -51,6 +57,8 @@ ActiveRecord::Schema.define(version: 2018_11_15_152116) do
     t.string "name"
     t.string "email"
     t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "comments", "projects"

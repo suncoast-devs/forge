@@ -7,6 +7,7 @@ class CreateSubmissions < ActiveRecord::Migration[5.2]
       t.integer :status
       t.text :memo
       t.boolean :is_paid
+      t.timestamps
     end
   end
 end
