@@ -1,0 +1,27 @@
+= form_with model: [:admin, @project] do |form|
+  - if @project.errors.any?
+    - @project.errors.full_messages.each do |message|
+      article.message.is-danger
+        .message-body
+          = message
+  .field
+    = form.label :title, class: "label"
+    .control
+      = form.text_field :title, class: "input"
+  .field
+    = form.label :description, class: "label"
+    .control
+      = form.text_area :description, class: "textarea"
+  .field
+    = form.label :deadline_on, class: "label"
+    .control
+      = form.date_select :deadline_on
+  .field
+    = form.label :bid, class: "label"
+    .control
+      = form.text_field :bid, class: "input"
+  .field.is-grouped
+    .control
+      = form.submit class: "button is-link"
+    .control
+      = link_to "Cancel", admin_projects_path, class: "button is-text"

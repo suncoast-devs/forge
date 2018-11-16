@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    title Forge
+    link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"]
+    script[defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"]
+    = javascript_include_tag "application"
+  body
+    nav.navbar[role="navigation" aria-label="main navigation"]
+      .container
+        .navbar-brand
+          = link_to "Forge", root_path, class: "navbar-item has-text-weight-bold"
+          .navbar-burger.burger
+            span
+            span
+            span
+        .navbar-menu
+          .navbar-start
+            = link_to "Projects", projects_path, class: "navbar-item"
+            .navbar-item.has-dropdown.is-hoverable.is-mobile
+              span.navbar-link Admin
+              .navbar-dropdown
+                = link_to "Projects", admin_projects_path, class: "navbar-item"
+          .navbar-end
+            .navbar-item
+              .field.is-grouped
+                - if signed_in?
+                  p.control
+                    - current_user.name
+                  p.control
+                    = link_to "Sign Out", sign_out_path, class: "button is-primary"
+                - else
+                  p.control
+                    = link_to "Sign In", sign_in_path, class: "button is-primary"
+    section.section
+      .container
+        = yield

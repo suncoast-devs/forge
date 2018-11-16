@@ -1,0 +1,22 @@
+h2.title Project Administration
+
+table.table.is-fullwidth
+  thead
+    tr
+      th Title
+      th Deadline
+      th Bid
+      th Status
+  tbody
+    - @projects.each do |project|
+      tr
+        td= link_to project.title, [:admin, project]
+        td= time_ago_in_words project.deadline_on
+        td
+          | $
+          = project.bid
+        td
+          span.tag
+            = project.status.humanize
+
+= link_to "New Project", new_admin_project_path, class: "button is-primary"

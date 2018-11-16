@@ -8,6 +8,7 @@ gem "puma", "~> 3"
 
 gem "omniauth"
 gem "omniauth-google-oauth2"
+gem "slim"
 
 group :development do
   gem "byebug"

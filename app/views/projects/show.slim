@@ -1,0 +1,27 @@
+h1.title
+  = @project.title
+.columns
+  .column
+    p
+      = @project.description
+  .column.is-narrow
+    .box
+      table.table
+        tr
+          th
+            | Bid
+          td
+            | $
+            = @project.bid
+        tr
+          th
+            | Deadline
+          td
+            = time_tag @project.deadline_on
+- @project.comments.each do |comment|
+  = comment.author.name
+  | : 
+  = comment.message
+= form_with url: comment_project_path, model: @project.comments.new do |form|
+  = form.text_field :message
+  = form.submit
