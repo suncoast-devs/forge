@@ -8,6 +8,7 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.integer :status
       t.boolean :is_paid
       t.references :requested_by, foreign_key: {to_table: :users}
+      t.references :claimed_by, foreign_key: {to_table: :users}
       t.references :authorized_by, foreign_key: {to_table: :users}
       t.timestamps
     end

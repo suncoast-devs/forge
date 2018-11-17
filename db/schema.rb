@@ -54,10 +54,12 @@ ActiveRecord::Schema.define(version: 2018_11_16_161605) do
     t.integer "status"
     t.boolean "is_paid"
     t.bigint "requested_by_id"
+    t.bigint "claimed_by_id"
     t.bigint "authorized_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["authorized_by_id"], name: "index_projects_on_authorized_by_id"
+    t.index ["claimed_by_id"], name: "index_projects_on_claimed_by_id"
     t.index ["requested_by_id"], name: "index_projects_on_requested_by_id"
   end
 
@@ -72,5 +74,6 @@ ActiveRecord::Schema.define(version: 2018_11_16_161605) do
   add_foreign_key "comments", "projects"
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "projects", "users", column: "authorized_by_id"
+  add_foreign_key "projects", "users", column: "claimed_by_id"
   add_foreign_key "projects", "users", column: "requested_by_id"
 end

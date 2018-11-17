@@ -1,6 +1,7 @@
 module Admin
   class ProjectsController < ApplicationController
-    before_action :authenticate!
+    before_action :authorize_admin!
+    before_action :find_project, only: [:edit, :update]
 
     def index
       @projects = Project.all
@@ -23,12 +24,9 @@ module Admin
     end
 
     def edit
-      @project = Project.find(params[:id])
     end
 
     def update
-      @project = Project.find(params[:id])
-
       if @project.update(project_params)
         redirect_to @project, notice: "Project Updated"
       else
@@ -37,6 +35,10 @@ module Admin
     end
 
     private
+
+    def find_project
+      @project = Project.find(params[:id])
+    end
 
     def project_params
       params.require(:project).permit(:title, :description, :deadline_on, :bid, :is_paid, :status)

@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
     redirect_to :sign_in unless signed_in?
   end
 
+  def authorize_admin!
+    authenticate!
+    redirect_to :root unless current_user.admin?
+  end
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   rescue StandardError

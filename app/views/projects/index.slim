@@ -1,4 +1,18 @@
-h2.title Open Projects
+h2.title Projects
+
+.tabs
+  ul
+    li[class=(params[:t].nil? && "is-active")]
+      = link_to "All", projects_path
+    li[class=(params[:t] == "in_progress" && "is-active")]
+      = link_to "Available", projects_path(t: :pending)
+    li[class=(params[:t] == "in_progress" && "is-active")]
+      = link_to "In Progress", projects_path(t: :in_progress)
+    li[class=(params[:t] == "complete" && "is-active")]
+      = link_to "Completed", projects_path(t: :complete)
+    li[class=(params[:t] == "claimed" && "is-active")]
+      = link_to "Yours", projects_path(t: :claimed)
+
 
 table.table.is-fullwidth
   thead
