@@ -20,11 +20,13 @@ html
             span
         .navbar-menu
           .navbar-start
-            = link_to "Projects", projects_path, class: "navbar-item"
-            .navbar-item.has-dropdown.is-hoverable.is-mobile
-              span.navbar-link Admin
-              .navbar-dropdown
-                = link_to "Projects", admin_projects_path, class: "navbar-item"
+            - if signed_in?
+              = link_to "Projects", projects_path, class: "navbar-item"
+              - if current_user.admin?
+                .navbar-item.has-dropdown.is-hoverable.is-mobile
+                  span.navbar-link Admin
+                  .navbar-dropdown
+                    = link_to "Projects", admin_projects_path, class: "navbar-item"
           .navbar-end
             .navbar-item
               .field.is-grouped
