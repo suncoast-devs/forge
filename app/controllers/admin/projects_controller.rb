@@ -17,6 +17,7 @@ module Admin
       end
 
       if @project.save
+        OnProjectCreateJob.perform_later(@project)
         redirect_to @project, notice: "Project Created"
       else
         render :new

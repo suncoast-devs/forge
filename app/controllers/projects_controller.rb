@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
     @project.comments.create(comment_params) do |comment|
       comment.author = current_user
     end
+    # OnCommentCreateJob.perform_later(@comment)
 
     redirect_to @project
   end

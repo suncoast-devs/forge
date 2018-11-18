@@ -11,6 +11,7 @@ gem "commonmarker"
 gem "mini_magick"
 gem "omniauth"
 gem "omniauth-google-oauth2"
+gem "postmark"
 gem "slim"
 
 group :development do
