@@ -5,12 +5,12 @@ class ProjectsController < ApplicationController
   def index
     scope = Project
     scope = case params[:t]
-      when "claimed" then scope.where(claimed_by: current_user)
-      when "in_progress" then scope.where(status: :in_progress)
-      when "complete" then scope.where(status: :complete)
-      when "pending" then scope.where(status: :pending)
-      else scope
-    end
+            when "claimed" then scope.where(claimed_by: current_user)
+            when "in_progress" then scope.where(status: :in_progress)
+            when "complete" then scope.where(status: :complete)
+            when "pending" then scope.where(status: :pending)
+            else scope
+            end
 
     @projects = scope.order(deadline_on: :ASC)
   end
@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     @project.comments.create(comment_params) do |comment|
       comment.author = current_user
     end
-    # OnCommentCreateJob.perform_later(@comment)
+    OnCommentCreateJob.perform_later(@comment)
 
     redirect_to @project
   end
