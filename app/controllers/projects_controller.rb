@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def comment
-    @project.comments.create(comment_params) do |comment|
+    @comment = @project.comments.create(comment_params) do |comment|
       comment.author = current_user
     end
     OnCommentCreateJob.perform_later(@comment)
