@@ -60,10 +60,10 @@ h2.title.is-4 Discussion
               = link_to comment.file do
                 - if comment.file.previewable?
                   figure.image
-                    = image_tag comment.file.preview(resize: "200x200>")
+                    = image_tag comment.file.preview(resize: "640x640>")
                 - elsif comment.file.variable?
                   figure.image
-                    = image_tag comment.file.variant(resize: "200x200>")
+                    = image_tag comment.file.variant(resize: "640x640>")
                 - else
                     span.icon
                       i.fas.fa-download
